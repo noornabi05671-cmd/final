@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Car Showroom | Honda Collection</title>
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-card:#141414;
+    --bg-card-hover:#1c1c1c;
+    --orange:#ff7a1a;
+    --orange-light:#ffb347;
+    --orange-dark:#c9540c;
+    --text:#f2f2f2;
+    --text-muted:#a8a8a8;
+    --border:#2a2a2a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', Arial, sans-serif;
+    line-height:1.6;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* ===== HEADER ===== */
+  header{
+    background:linear-gradient(180deg,#111 0%, #0a0a0a 100%);
+    border-bottom:2px solid var(--orange);
+    padding:20px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .logo{
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:1px;
+  }
+  .logo span{color:var(--orange);}
+  nav a{
+    margin-left:28px;
+    font-weight:600;
+    color:var(--text-muted);
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--orange);}
+
+  /* ===== HERO ===== */
+  .hero{
+    text-align:center;
+    padding:80px 6% 60px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,122,26,0.15), transparent 60%);
+  }
+  .hero h1{
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:1px;
+  }
+  .hero h1 span{color:var(--orange);}
+  .hero p{
+    color:var(--text-muted);
+    max-width:650px;
+    margin:18px auto 0;
+    font-size:17px;
+  }
+  .hero-badge{
+    display:inline-block;
+    margin-top:22px;
+    padding:8px 22px;
+    border:1px solid var(--orange);
+    border-radius:30px;
+    color:var(--orange-light);
+    font-size:14px;
+    letter-spacing:1px;
+  }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title{
+    text-align:center;
+    margin:60px 0 40px;
+  }
+  .section-title h2{
+    font-size:32px;
+    font-weight:800;
+  }
+  .section-title h2 span{color:var(--orange);}
+  .section-title p{
+    color:var(--text-muted);
+    margin-top:8px;
+  }
+
+  /* ===== CAR GRID ===== */
+  .car-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    gap:30px;
+    padding:0 6% 60px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .car-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .car-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--orange);
+    box-shadow:0 10px 30px rgba(255,122,26,0.15);
+    background:var(--bg-card-hover);
+  }
+  .car-img-wrap{
+    width:100%;
+    height:210px;
+    overflow:hidden;
+    background:#000;
+  }
+  .car-img-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+  }
+  .car-card:hover .car-img-wrap img{
+    transform:scale(1.08);
+  }
+  .car-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:4px 10px;
+    border-radius:20px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  .tag-eco{background:rgba(76,175,80,0.15); color:#7ed996;}
+  .tag-family{background:rgba(255,183,71,0.15); color:var(--orange-light);}
+  .tag-premium{background:rgba(255,122,26,0.15); color:var(--orange);}
+  .tag-sport{background:rgba(255,59,48,0.15); color:#ff6b5c;}
+
+  .car-body{
+    padding:20px 22px 24px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .car-title{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:2px;
+  }
+  .car-sub{
+    color:var(--text-muted);
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .specs{
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 14px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    margin-bottom:18px;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:14px 0;
+  }
+  .specs li b{
+    color:var(--text);
+    display:block;
+    font-size:12px;
+    color:var(--orange-light);
+    font-weight:600;
+  }
+  .price-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:auto;
+  }
+  .price{
+    font-size:20px;
+    font-weight:800;
+    color:var(--orange);
+  }
+  .price small{
+    display:block;
+    color:var(--text-muted);
+    font-size:11px;
+    font-weight:400;
+  }
+  .buy-btn{
+    background:var(--orange);
+    color:#0a0a0a;
+    font-weight:700;
+    padding:10px 20px;
+    border-radius:8px;
+    font-size:14px;
+    transition:background .2s, transform .2s;
+    border:none;
+    cursor:pointer;
+  }
+  .buy-btn:hover{
+    background:var(--orange-light);
+    transform:scale(1.05);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact{
+    background:linear-gradient(180deg,#111 0%, #0a0a0a 100%);
+    border-top:2px solid var(--orange);
+    padding:60px 6%;
+    text-align:center;
+  }
+  .contact h2{
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .contact h2 span{color:var(--orange);}
+  .contact p{
+    color:var(--text-muted);
+    margin-bottom:26px;
+  }
+  .contact-info{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:10px;
+  }
+  .contact-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    padding:18px 30px;
+    border-radius:12px;
+    min-width:220px;
+  }
+  .contact-card .icon{
+    font-size:24px;
+    margin-bottom:8px;
+  }
+  .contact-card b{
+    display:block;
+    color:var(--orange-light);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:6px;
+  }
+  .contact-card a{
+    color:var(--text);
+    font-size:16px;
+    font-weight:600;
+  }
+  .contact-card a:hover{color:var(--orange);}
+
+  footer{
+    text-align:center;
+    padding:20px;
+    color:var(--text-muted);
+    font-size:13px;
+    border-top:1px solid var(--border);
+  }
+  footer span{color:var(--orange);}
+
+  @media(max-width:600px){
+    .hero h1{font-size:32px;}
+    header{flex-direction:column; gap:12px;}
+    nav a{margin:0 10px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">PRIME <span>CAR SHOWROOM</span></div>
+  <nav>
+    <a href="#cars">Cars</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>HONDA <span>COLLECTION</span></h1>
+  <p>From everyday city rides to pure sports performance — explore the full Honda lineup at Prime Car Showroom, all in one place.</p>
+  <div class="hero-badge">★ Genuine Honda Vehicles &nbsp;|&nbsp; New &amp; Imported</div>
+</section>
+
+<section id="cars" class="section-title">
+  <h2>Our <span>Honda</span> Lineup</h2>
+  <p>Cheapest to sportiest — pick the Honda that fits your budget</p>
+</section>
+
+<div class="car-grid">
+
+  <!-- Honda City -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://www.autobics.com/wp-content/uploads/2024/01/2024-Honda-City-Platinum-White-Pearl.jpg." alt="Honda City">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-eco">Budget Friendly</span>
+      <div class="car-title">Honda City 1.2L</div>
+      <div class="car-sub">Compact Sedan</div>
+      <ul class="specs">
+        <li><b>Engine</b>1.2L i-VTEC</li>
+        <li><b>Power</b>90 HP</li>
+        <li><b>Transmission</b>CVT / Manual</li>
+        <li><b>Seating</b>5 Person</li>
+        <li><b>Mileage</b>16-18 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 48.99 Lac<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda BR-V -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8JH2vOV04usjnJBkndHCcV9k8QSUuch5TWzUIzvyk7g&s=10" alt="Honda BR-V">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-family">Family SUV</span>
+      <div class="car-title">Honda BR-V 1.5L</div>
+      <div class="car-sub">7-Seater Crossover SUV</div>
+      <ul class="specs">
+        <li><b>Engine</b>1.5L i-VTEC</li>
+        <li><b>Power</b>119 HP</li>
+        <li><b>Transmission</b>CVT</li>
+        <li><b>Seating</b>7 Person</li>
+        <li><b>Mileage</b>13-15 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 63.99 Lac<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda Civic -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKDcWXZklNv5rfx1TbkqIl-yH7D_fZweslChRdbeLVPBe-U8E2KT7-mag8&s=10" alt="Honda Civic">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-family">Best Seller</span>
+      <div class="car-title">Honda Civic 1.5 Turbo RS</div>
+      <div class="car-sub">Executive Sedan</div>
+      <ul class="specs">
+        <li><b>Engine</b>1.5L VTEC Turbo</li>
+        <li><b>Power</b>176 HP</li>
+        <li><b>Transmission</b>CVT</li>
+        <li><b>Seating</b>5 Person</li>
+        <li><b>Mileage</b>12-14 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 82.99 Lac<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda HR-V -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3rMZwzmVdLd_TtE88aMm-mmmNTXf8EIZRc_ilXJUsY9SGuoZ8vmoGvnyN&s=10" alt="Honda HR-V">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-premium">Imported</span>
+      <div class="car-title">Honda HR-V EX-L</div>
+      <div class="car-sub">Compact SUV</div>
+      <ul class="specs">
+        <li><b>Engine</b>2.0L i-VTEC</li>
+        <li><b>Power</b>158 HP</li>
+        <li><b>Transmission</b>CVT</li>
+        <li><b>Seating</b>5 Person</li>
+        <li><b>Mileage</b>12-13 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 1.25 Crore<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda Accord -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH7xoyBT7Y9DWFdIx6zBYL5Q5LH3mPhsXgEYy5bgikwQ&s=10" alt="Honda Accord">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-premium">Imported</span>
+      <div class="car-title">Honda Accord 1.5 Turbo</div>
+      <div class="car-sub">Full-Size Luxury Sedan</div>
+      <ul class="specs">
+        <li><b>Engine</b>1.5L VTEC Turbo</li>
+        <li><b>Power</b>192 HP</li>
+        <li><b>Transmission</b>CVT</li>
+        <li><b>Seating</b>5 Person</li>
+        <li><b>Mileage</b>11-13 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 1.80 Crore<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda CR-V -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWU1DcErVy6amM9cwfbA8UuuUU00yZezZGFj8enAYVvw&s=10" alt="Honda CR-V">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-premium">Imported</span>
+      <div class="car-title">Honda CR-V Turbo</div>
+      <div class="car-sub">Premium Mid-Size SUV</div>
+      <ul class="specs">
+        <li><b>Engine</b>1.5L VTEC Turbo</li>
+        <li><b>Power</b>190 HP</li>
+        <li><b>Transmission</b>CVT / AWD</li>
+        <li><b>Seating</b>5 Person</li>
+        <li><b>Mileage</b>11-12 km/l</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 2.20 Crore<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda Civic Type R -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdj0T4ezeFv-5mOI6swAkrHZdzMkA-0CvKxW1vDVasSw&s" alt="Honda Civic Type R">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-sport">Sports</span>
+      <div class="car-title">Honda Civic Type R</div>
+      <div class="car-sub">Hot Hatch / Track Ready</div>
+      <ul class="specs">
+        <li><b>Engine</b>2.0L VTEC Turbo</li>
+        <li><b>Power</b>329 HP</li>
+        <li><b>Transmission</b>6-Speed Manual</li>
+        <li><b>Seating</b>4 Person</li>
+        <li><b>0-100 km/h</b>5.4 sec</li>
+        <li><b>Fuel</b>Petrol</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 3.50 Crore<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Honda NSX -->
+  <div class="car-card">
+    <div class="car-img-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3BXVmzbdUgCuCM4CpXnekt1u3LIsXHDGytaEt2LbIcw&s=10" alt="Honda NSX">
+    </div>
+    <div class="car-body">
+      <span class="car-tag tag-sport">Super Sports</span>
+      <div class="car-title">Honda NSX Hybrid</div>
+      <div class="car-sub">Mid-Engine Supercar</div>
+      <ul class="specs">
+        <li><b>Engine</b>3.5L Twin-Turbo V6 Hybrid</li>
+        <li><b>Power</b>573 HP</li>
+        <li><b>Transmission</b>9-Speed DCT</li>
+        <li><b>Seating</b>2 Person</li>
+        <li><b>0-100 km/h</b>2.9 sec</li>
+        <li><b>Drive</b>All-Wheel Drive</li>
+      </ul>
+      <div class="price-row">
+        <div class="price">PKR 9.50 Crore<small>Starting Price</small></div>
+        <button class="buy-btn" onclick="location.href='#contact'">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section id="contact" class="contact">
+  <h2>Get In <span>Touch</span></h2>
+  <p>Interested in any Honda model? Contact Prime Car Showroom now.</p>
+  <div class="contact-info">
+    <div class="contact-card">
+      <div class="icon">📞</div>
+      <b>Call / WhatsApp</b>
+      <a href="tel:03140527535">0314-0527535</a>
+    </div>
+    <div class="contact-card">
+      <div class="icon">✉️</div>
+      <b>Email</b>
+      <a href="mailto:noornabi05671@gmail.com">noornabi05671@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Prime Car Showroom — Honda Collection. All rights reserved. | Built with <span>♥</span> for car lovers.
+</footer>
+
+</body>
+</html>
